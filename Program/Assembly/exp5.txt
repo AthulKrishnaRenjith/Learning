@@ -1,0 +1,103 @@
+PROGRAM
+data segment
+
+        msg1 db 0ah,0dh, "Enter first number : $"
+        msg2 db 0ah,0dh, "Enter second number : $"
+        msg3 db 0ah,0dh, "Result is : $"
+
+data ends
+
+code segment
+	assume cs:code,ds:data
+        start: mov ax,data
+               mov ds,ax
+
+               lea dx,msg1
+               mov ah,09h
+               int 21h
+
+               mov ah,01h
+               int 21h
+               sub al,30h
+               mov bl,al
+
+               mov ah,01h
+               int 21h
+               sub al,30h
+               mov bh,al
+
+               mov ax,bx
+               aad
+               mov bl,al
+ 
+               lea dx,msg2
+               mov al,09h
+               int 21h
+
+               mov ah,01h
+               int 21h
+               sub ah,30h
+               mov ch,al
+
+               mov ah,01h
+               int 21h
+               sub al,30h
+               mov cl,al
+
+               mov ax,cx
+               aad
+
+               mul bl
+
+               mov cx,03e8h
+               mov dx,0000h
+
+               div cx
+
+               mov bx,dx
+ 
+               mov dl,al
+               add dl,30h
+               mov ah,02h
+               int 21h
+
+               mov cl,64h
+               mov ax,bx
+ 
+               div cl
+
+               mov bl,ah
+
+               mov dl,al
+               add dl,30h
+               mov ah,02h
+               int 21h
+
+               mov cl,0Ah
+               mov bh,00h
+               mov ax,bx
+
+               div cl
+
+               mov bl,ah
+ 
+               mov dl,al
+               add dl,30h
+               mov ah,02h
+               int 21h
+
+               mov dl,bl
+               add dl,30h
+               mov ah,02h
+               int 21h
+
+               mov ah,4ch
+               int 21h
+
+code ends
+end start
+
+OUTPUT
+Enter first number : 2
+Enter second number : 3
+Result is : 6

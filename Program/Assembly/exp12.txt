@@ -1,0 +1,48 @@
+PROGRAM
+data segment
+
+	num1 db 09h dup(?)
+	msg1 db 10,13,"Enter the number : $"
+	msg2 db 10,13,"Number is odd $"
+	msg3 db 10,13,"Number is even $"
+
+data ends
+
+code segment
+	 assume cs:code,ds:data
+	 start: mov ax,data
+	        mov ds,ax
+
+	        lea dx,msg1
+	        mov ah,9
+		int 21h
+
+		mov ah,1
+		int 21h
+
+		sub al,30h
+
+		div #2
+		cmp ah,0
+		jne odd
+
+		lea dx,msg3
+		mov ah,9
+		int 21h
+
+		mov ah,4ch
+		int 21h
+
+	  odd:  lea dx,msg2
+	        mov ah,9
+	        int 21h
+
+	        mov ah,4ch
+	        int 21h
+
+code ends
+end start
+
+OUTPUT
+Enter the number : 2
+Number is even.
