@@ -1,0 +1,3 @@
+[submodule "Projects/recipes-telegram-bo"]
+	path = Projects/recipes-telegram-bo
+	url = https://github.com/RomainGratier/recipes-telegram-bot.git
