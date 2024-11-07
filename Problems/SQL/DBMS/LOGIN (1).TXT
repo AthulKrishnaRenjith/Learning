@@ -1,0 +1,196 @@
+1. create table USER_TYPE_MASTER_TABLE(USER_TYPE number(2) primary key, TYPE_DESCR varchar(15));
+   
+   Table created
+
+2. insert into USER_TYPE_MASTER_TABLE values(1,'Student');
+   insert into USER_TYPE_MASTER_TABLE values(2,'Staff');
+   insert into USER_TYPE_MASTER_TABLE values(3,'Hod');
+   insert into USER_TYPE_MASTER_TABLE values(4,'Principal');
+   
+   1 row created.
+   1 row created.
+   1 row created.
+   1 row created.
+
+3. select * from USER_TYPE_MASTER_TABLE;
+    USER_TYPE TYPE_DESCR
+
+---------- ---------------
+         1 Student
+         2 Staff
+         3 Hod
+         4 Principal
+
+4. create table DEPT_MASTER_TBL(DEPT_CODE number(2) primary key, DEPT varchar(15));
+
+   Table created
+
+5. insert into DEPT_MASTER_TBL values(1,'Cyber');
+   insert into DEPT_MASTER_TBL values(2,'CSE');
+   insert into DEPT_MASTER_TBL values(3,'ECE');
+   insert into DEPT_MASTER_TBL values(4,'EEE');
+
+   1 row created.
+   1 row created.
+   1 row created.
+   1 row created.
+
+6. select * from DEPT_MASTER_TBL;
+
+
+ DEPT_CODE DEPT
+---------- ---------------
+         1 Cyber
+         2 CSE
+         3 ECE
+         4 EEE
+
+7. create table USER_DTLS_TBL(USER_ID number(3) primary key, USER_NAME varchar(15), DEPT_CODE NUMBER(2) references DEPT_MASTER_TBL);
+
+   Table created.
+
+8. insert into USER_DTLS_TBL values(101,'Harshaya',1);
+   insert into USER_DTLS_TBL values(102,'Liva',1);
+   insert into USER_DTLS_TBL values(103,'Avanthika',2);
+   insert into USER_DTLS_TBL values(104,'Surya',2);
+   insert into USER_DTLS_TBL values(105,'Anjala',3);
+   insert into USER_DTLS_TBL values(106,'Riyan',3);
+   insert into USER_DTLS_TBL values(107,'Anju',4);
+   insert into USER_DTLS_TBL values(108,'Ahaana',4);
+
+   1 row created
+   1 row created
+   1 row created
+   1 row created
+   1 row created
+   1 row created
+   1 row created
+   1 row created
+
+9. select * from USER_DTLS_TBL;
+
+   
+   USER_ID USER_NAME        DEPT_CODE
+---------- --------------- ----------
+       101 Harshaya                 1
+       102 Liva                     1
+       103 Avanthika                2
+       104 Surya                    2
+       105 Anjala                   3
+       106 Riyan                    3
+       107 Anju                     4
+       108 Ahaana                   4
+
+10. create table USER_LOGIN_TBL(USER_ID number(3) references USER_DTLS_TBL, USER_PWD varchar(8) primary key, USER_TYPE number(2) references USER_TYPE_MASTER_TABLE, USER_CREATED_DT date);
+
+    Table created.
+
+11. INSERT INTO USER_LOGIN_TBL VALUES(101,'aaa',1,'15-jan-24');
+    INSERT INTO USER_LOGIN_TBL VALUES(102,'bbb',1,'16-feb-24');
+    INSERT INTO USER_LOGIN_TBL VALUES(103,'ccc',2,'13-jan-23');
+    INSERT INTO USER_LOGIN_TBL VALUES(104,'ddd',3,'15-jan-22');
+    INSERT INTO USER_LOGIN_TBL VALUES(105,'eee',1,'13-may-23');
+    INSERT INTO USER_LOGIN_TBL VALUES(106,'fff',1,'14-jan-24');
+    INSERT INTO USER_LOGIN_TBL VALUES(107,'ggg',2,'17-apr-22');
+    INSERT INTO USER_LOGIN_TBL VALUES(108,'hhh',3,'18-jul-23');
+
+    1 row created.
+    1 row created.
+    1 row created.
+    1 row created.
+    1 row created.
+    1 row created.
+    1 row created.
+    1 row created.
+    1 row created.
+
+12. SELECT * FROM USER_LOGIN_TBL;
+
+
+   USER_ID USER_PWD  USER_TYPE USER_CREA
+---------- -------- ---------- ---------
+       101 aaa               1 15-JAN-24
+       102 bbb               1 16-FEB-24
+       103 ccc               2 13-JAN-23
+       104 ddd               3 15-JAN-22
+       105 eee               1 13-MAY-23
+       106 fff               1 14-JAN-24
+       107 ggg               2 17-APR-22
+       108 hhh               3 18-JUL-23
+
+13. SELECT USER_NAME FROM USER_DTLS_TBL
+    WHERE USER_ID IN(SELECT USER_ID FROM USER_LOGIN_TBL 
+    WHERE USER_CREATED_DT>'12-jan-23' AND USER_TYPE IN(SELECT USER_TYPE FROM USER_TYPE_MASTER_TABLE
+    WHERE TYPE_DESCR='Student'));
+
+    USER_NAME
+---------------
+Harshaya
+Liva
+Anjala
+Riyan
+
+14. SELECT USER_NAME FROM USER_DTLS_TBL,DEPT_MASTER_TBL
+    WHERE(USER_DTLS_TBL.DEPT_CODE=DEPT_MASTER_TBL.DEPT_CODE AND DEPT_MASTER_TBL.DEPT='Cyber');
+
+    USER_NAME
+---------------
+Harshaya
+Liva
+
+15. SELECT USER_NAME FROM USER_DTLS_TBL,DEPT_MASTER_TBL
+    WHERE(USER_DTLS_TBL.DEPT_CODE=DEPT_MASTER_TBL.DEPT_CODE AND USER_DTLS_TBL.DEPT_CODE!=1);
+
+USER_NAME
+---------------
+Avanthika
+Surya
+Anjala
+Riyan
+Anju
+Ahaana
+
+16. SELECT USER_NAME FROM USER_TYPE_MASTER_TABLE, USER_LOGIN_TBL, USER_DTLS_TBL
+    WHERE(USER_TYPE_MASTER_TABLE.USER_TYPE=USER_LOGIN_TBL.USER_TYPE AND
+    USER_LOGIN_TBL.USER_ID=USER_DTLS_TBL.USER_ID AND USER_TYPE_MASTER_TABLE.TYPE_DESCR='Hod');
+
+    USER_NAME
+---------------
+Surya
+Ahaana
+
+17. SELECT USER_NAME FROM USER_DTLS_TBL, USER_LOGIN_TBL
+    WHERE(USER_DTLS_TBL.USER_ID=USER_LOGIN_TBL.USER_ID AND USER_CREATED_DT BETWEEN '01-jan-23'     AND '31-dec-23'); 
+    
+    USER_NAME
+---------------
+Avanthika
+Anjala
+Ahaana
+
+18. SELECT USER_TYPE_MASTER_TABLE.TYPE_DESCR,COUNT(*) FROM
+    USER_DTLS_TBL,USER_LOGIN_TBL,USER_TYPE_MASTER_TABLE WHERE     USER_DTLS_TBL.USER_ID=USER_LOGIN_TBL.USER_ID
+    AND USER_TYPE_MASTER_TABLE.USER_TYPE=USER_LOGIN_TBL.USER_TYPE GROUP BY TYPE_DESCR;
+
+    TYPE_DESCR        COUNT(*)
+--------------- ----------
+Staff                    2
+Student                  4
+Hod                      2
+
+19. SELECT TO_CHAR(USER_CREATED_DT,'DD/MM/YYYY'),USER_NAME FROM USER_DTLS_TBL,USER_LOGIN_TBL
+    WHERE(USER_DTLS_TBL.USER_ID=USER_LOGIN_TBL.USER_ID);
+
+TO_CHAR(US USER_NAME
+---------- ---------------
+15/01/2024 Harshaya
+16/02/2024 Liva
+13/01/2023 Avanthika
+15/01/2022 Surya
+13/05/2023 Anjala
+14/01/2024 Riyan
+17/04/2022 Anju
+18/07/2023 Ahaana
+
+
+    

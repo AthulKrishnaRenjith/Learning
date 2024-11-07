@@ -1,0 +1,80 @@
+CREATE TABLE studemt(rollno INTEGER,name VARCHAR(50),address VARCHAR(100),mobile VARCHAR(100));
+ALTER TABLE studemt ADD (age INT);
+
+1.create table ,2.ADD Age
+========================================================================================
+
+SQL> CREATE TABLE studemt(rollno INTEGER,name VARCHAR(50),address VARCHAR(100),mobile VARCHAR(100));
+SQL> ALTER TABLE studemt ADD (age INT);
+
+Table created.
+
+SQL> desc studemt
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(38)
+ NAME                                               VARCHAR2(50)    
+ ADDRESS                                            VARCHAR2(100)
+ MOBILE                                             VARCHAR2(100)
+ AGE                                                NUMBER(38)
+
+========================================================================================
+
+3.Modify datetype of mobile no to number
+========================================================================================
+
+SQL> ALTER TABLE studemt MODIFY mobile number;
+
+Table altered.
+
+SQL> desc studemt
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(38)
+ NAME                                               VARCHAR2(50)
+ ADDRESS                                            VARCHAR2(100)
+ MOBILE                                             NUMBER
+ AGE                                                NUMBER(38)
+========================================================================================
+
+4.ALTER TABLE studemt DROP COLUMN address;
+
+SQL> ALTER TABLE studemt DROP COLUMN address;
+
+Table altered.
+
+SQL> desc studemt
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(38)
+ NAME                                               VARCHAR2(50)
+ MOBILE                                             NUMBER
+ AGE                                                NUMBER(38)
+
+========================================================================================
+
+5.Change Table Name
+========================================================================================
+
+ALTER TABLE studemt RENAME TO cyber_students;
+
+OutPut
+SQL> desc studemt
+ERROR:
+ORA-04043: object studemt does not exist
+
+
+SQL> desc cyber_students;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(38)
+ NAME                                               VARCHAR2(50)
+ MOBILE                                             NUMBER
+ AGE                                                NUMBER(38)
+========================================================================================
+6.Drop Table 
+========================================================================================
+DROP TABLE cyber_students;
+
+
+

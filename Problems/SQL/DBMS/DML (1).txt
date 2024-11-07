@@ -1,0 +1,33 @@
+Aim.CREATE TABLE students(roll_no INT,age INT,name VARCHAR(50),address VARCHAR(100));
+
+1. INSERT INTO students VALUES(1,18,'pranav','thrissur');
+INSERT INTO students VALUES(2,18,'dileep','malapuram');
+INSERT INTO students VALUES(3,18,'sango','kottayam');
+INSERT INTO students VALUES(4,22,'sabith','idikki');
+INSERT INTO students VALUES(5,24,'abhi','eranakulam');
+INSERT INTO students VALUES(6,20,'amal','kollam');
+INSERT INTO students VALUES(7,23,'trafan','thodupuzha');
+INSERT INTO students VALUES(10,20,'sardhi','alapuzha');
+
+2.SELECT * FROM students;
+
+3.SELECT name,age FROM students WHERE age<=21;
+
+4.SELECT name FROM students WHERE address='eranakulam';
+
+5.SELECT name,address FROM students WHERE roll_no BETWEEN 5 AND 10;
+
+6.SELECT name,address FROM students WHERE name LIKE '%G%';
+
+7.SELECT name,address FROM students WHERE name LIKE 't_a%';
+
+8.SELECT roll_no,name FROM students WHERE roll_no>2 and address='kollam';
+
+9.UPDATE students SET address='calicut' WHERE roll_no=5;
+
+10.DELETE FROM students WHERE roll_no='10';
+
+11.TRUNCATE TABLE students;
+
+
+add a sample outpus in every query runned

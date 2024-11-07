@@ -1,0 +1,65 @@
+1. CREATE TABLE PERSONS(P_ID NUMBER(5) PRIMARY KEY, LSTNAM VARCHAR(20), FSTNAM VARCHAR(20),    ADDRESS VARCHAR(20), CITY VARCHAR(20));
+
+   Table created.
+
+2. CREATE TABLE ORDER3(O_ID NUMBER(5) PRIMARY KEY, ORDERNO NUMBER(10), P_ID NUMBER(5) REFERENCES     PERSONS);
+
+   Table created.
+
+3. INSERT INTO PERSONS VALUES(1,'Hansen','Ola','Timto','sandness');
+   INSERT INTO PERSONS VALUES(2,'Peter','tove','berlin','sandnes');
+   INSERT INTO PERSONS VALUES(3,'Petterson','kari','eto','sayndnes');
+   INSERT INTO PERSONS VALUES(4,'Svendy','lemo','nito','sayndnes');
+   INSERT INTO ORDER3 VALUES(1,76767,3);
+   INSERT INTO ORDER3 VALUES(2,56767,3);
+   INSERT INTO ORDER3 VALUES(3,45667,3);
+   INSERT INTO ORDER3 VALUES(4,3455,3);
+   INSERT INTO ORDER3 VALUES(5,95667,3);
+
+   1 row created.
+   1 row created.
+   1 row created.
+   1 row created.
+   1 row created.
+   1 row created.
+   1 row created.
+   1 row created.
+   1 row created.
+  
+   SELECT * FROM PERSONS;
+
+         P_ID LSTNAM               FSTNAM               ADDRESS
+---------- -------------------- -------------------- --------------------
+CITY
+--------------------
+         1 Hansen               Ola                  Timto
+sandness
+
+         2 Peter                tove                 berlin
+sandnes
+
+         3 Petterson            kari                 eto
+sayndnes
+
+
+      P_ID LSTNAM               FSTNAM               ADDRESS
+---------- -------------------- -------------------- --------------------
+CITY
+--------------------
+         4 Svendy               lemo                 nito
+sayndnes
+
+   SELECT * 
+   
+4. SELECT PERSONS.LSTNAM,PERSONS.FSTNAM,ORDER3.ORDERNO FROM PERSONS INNER JOIN ORDER3 ON    PERSONS.P_ID=ORDER3.P_ID ORDER BY PERSONS.LSTNAM;
+
+   LSTNAM               FSTNAM                  ORDERNO
+-------------------- -------------------- ----------
+Petterson            kari                      76767
+Petterson            kari                      56767
+Petterson            kari                      95667
+Petterson            kari                       3455
+Petterson            kari                      45667
+
+
+   

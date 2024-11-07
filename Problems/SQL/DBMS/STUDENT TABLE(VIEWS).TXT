@@ -1,0 +1,62 @@
+1. CREATE TABLE STUDENT(ADMN_NO NUMBER(5) PRIMARY KEY, NAME VARCHAR(10), BRANCH VARCHAR(5),    SESSIONAL_MARK NUMBER(5), UNIVERSITY_MARK NUMBER(5), TOTAL NUMBER(7));
+
+   Table created.
+
+2. INSERT INTO STUDENT VALUES(101,'Ann','cYBER',45,82,127);
+   INSERT INTO STUDENT VALUES(102,'Resmi','cSE',46,80,126);
+
+   1 row created.
+   1 row created.
+
+3. SELECT * FROM STUDENT;
+
+
+   ADMN_NO NAME       BRANC SESSIONAL_MARK UNIVERSITY_MARK      TOTAL
+---------- ---------- ----- -------------- --------------- ----------
+       101 Ann        cYBER             45              82        127
+       102 Resmi      cSE               46              80        126
+
+4. CREATE VIEW STUDENTS AS SELECT ADMN_NO,SESSIONAL_MARK,UNIVERSITY_MARK,TOTAL FROM STUDENT;
+
+   View created.
+
+5. INSERT INTO STUDENTS VALUES (110,43,88,131);
+   INSERT INTO STUDENTS VALUES (111,46,80,126);
+
+   1 row created.
+   1 row created.
+
+6. SELECT * FROM STUDENTS;
+   
+   
+   ADMN_NO SESSIONAL_MARK UNIVERSITY_MARK      TOTAL
+---------- -------------- --------------- ----------
+       101             45              82        127
+       102             46              80        126
+       110             43              88        131
+       111             46              80        126
+
+7. SELECT * FROM STUDENT;
+
+   
+   ADMN_NO NAME       BRANC SESSIONAL_MARK UNIVERSITY_MARK      TOTAL
+---------- ---------- ----- -------------- --------------- ----------
+       101 Ann        cYBER             45              82        127
+       102 Resmi      cSE               46              80        126
+       110                              43              88        131
+       111                              46              80        126
+
+8. UPDATE STUDENTS SET UNIVERSITY_MARK=86 WHERE ADMN_NO=111;
+
+   1 row updated.
+
+9. SELECT * FROM STUDENT;
+
+      ADMN_NO NAME       BRANC SESSIONAL_MARK UNIVERSITY_MARK      TOTAL
+---------- ---------- ----- -------------- --------------- ----------
+       101 Ann        cYBER             45              82        127
+       102 Resmi      cSE               46              80        126
+       110                              43              88        131
+       111                              46              86        126
+
+

@@ -1,0 +1,80 @@
+declare
+a number;
+b number;
+c number;
+
+begin
+
+a:=&a;
+b:=&b;
+c:=a + b;
+
+dbms_output.put_line('Sum Is ' || c);
+
+end;
+/
+
+Enter value for a: 1
+old   8: a:=&a;
+new   8: a:=1;
+Enter value for b: 2
+old   9: b:=&b;
+new   9: b:=2;
+Sum Is 3
+
+ODD OR EVEN
+
+DECLARE
+a NUMBER;
+BEGIN
+a:=&a;
+IF a mod 2 = 0 THEN
+    dbms_output.put_line('Even');
+ELSE
+    dbms_output.put_line('Odd');
+END IF;
+end;
+/
+
+Enter value for a: 2
+old   4: a:=&a;
+new   4: a:=2;
+Even
+
+DECLARE
+
+a number;
+b number;
+
+BEGIN
+
+a:=&a;
+b:=&b;
+if a > b THEN
+    dbms_output.put_line(a || 'Is Greater');
+ELSE
+    dbms_output.put_line(b || 'Is Greater');
+end if;
+end;
+/
+
+DECLARE
+a number;
+b number;
+rev number;
+BEGIN
+a:=&a;
+rev:=0;
+while a>0 loop
+b:= a mod 10;
+rev := (rev*10) + b;
+a := trunc(a / 10);
+end loop;
+dbms_output.put_line(rev);
+end;
+/
+
+Enter value for a: 123
+old   6: a:=&a;
+new   6: a:=123;
+321

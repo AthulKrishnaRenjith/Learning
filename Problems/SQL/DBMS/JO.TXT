@@ -1,0 +1,121 @@
+1.
+ CREATE TABLE PERSONSS(P_ID NUMBER(5) PRIMARY KEY, LSTNAM VARCHAR(20), FSTNAM VARCHAR(20),ADDRESS VARCHAR(20), CITY VARCHAR(20));
+
+
+Table created.
+
+1.1 CREATE TABLE ORDERSS3(O_ID NUMBER(5) PRIMARY KEY, ORDERNO NUMBER(10), P_ID NUMBER(5) REFERENCES     PERSONSS);
+
+Table created.
+
+2.INSERT INTO PERSONSS VALUES(1,'PAUL','LIVA','KKM','TSR');
+INSERT INTO PERSONSS VALUES(2,'SR','ADIL','VADAKARA','KOZHIKODE');
+INSERT INTO PERSONSS VALUES(3,'AJITH','ADHITHYA','TPR','EKM');
+INSERT INTO PERSONSS VALUES(4,'BASHIR','HAMJI','KLM','KTK');
+INSERT INTO ORDERSS3 VALUES(1,45238,3);
+INSERT INTO ORDERSS3 VALUES(2,45236,3);
+INSERT INTO ORDERSS3 VALUES(3,45231,3);
+INSERT INTO ORDERSS3 VALUES(4,45208,3);
+INSERT INTO ORDERSS3 VALUES(5,45248,3);
+
+
+1 row created.
+
+1 row created.
+
+1 row created.
+
+1 row created.
+
+1 row created.
+
+1 row created.
+
+1 row created.
+
+1 row created.
+
+1 row created.
+
+3. SELECT * FROM PERSONSS;
+
+
+      P_ID LSTNAM               FSTNAM               ADDRESS
+---------- -------------------- -------------------- --------------------
+CITY
+--------------------
+         1 PAUL                 LIVA                 KKM
+TSR
+
+         2 SR                   ADIL                 VADAKARA
+KOZHIKODE
+
+         3 AJITH                ADHITHYA             TPR
+EKM
+
+
+      P_ID LSTNAM               FSTNAM               ADDRESS
+---------- -------------------- -------------------- --------------------
+CITY
+--------------------
+         4 BASHIR               HAMJI                KLM
+KTK
+
+
+3. SELECT PERSONSS.LSTNAM,PERSONSS.FSTNAM,ORDERSS3.ORDERNO FROM PERSONSS INNER JOIN ORDERSS3 ON    PERSONSS.P_ID=ORDERSS3.P_ID ORDER BY PERSONSS.LSTNAM;
+
+
+LSTNAM               FSTNAM                  ORDERNO
+-------------------- -------------------- ----------
+AJITH                ADHITHYA                  45238
+AJITH                ADHITHYA                  45236
+AJITH                ADHITHYA                  45248
+AJITH                ADHITHYA                  45208
+AJITH                ADHITHYA                  45231
+
+4. SELECT PERSONSS.LSTNAM,PERSONSS.FSTNAM,ORDERSS3.ORDERNO FROM PERSONSS LEFT JOIN ORDERSS3 ON    PERSONSS.P_ID=ORDERSS3.P_ID ORDER BY PERSONSS.LSTNAM;
+
+LSTNAM               FSTNAM                  ORDERNO
+-------------------- -------------------- ----------
+AJITH                ADHITHYA                  45238
+AJITH                ADHITHYA                  45236
+AJITH                ADHITHYA                  45231
+AJITH                ADHITHYA                  45208
+AJITH                ADHITHYA                  45248
+BASHIR               HAMJI
+PAUL                 LIVA
+SR                   ADIL
+
+
+5.SELECT PERSONSS.LSTNAM,PERSONSS.FSTNAM,ORDERSS3.ORDERNO FROM PERSONSS FULL JOIN ORDERSS3 ON    PERSONSS.P_ID=ORDERSS3.P_ID ORDER BY PERSONSS.LSTNAM;
+
+
+LSTNAM               FSTNAM                  ORDERNO
+-------------------- -------------------- ----------
+AJITH                ADHITHYA                  45238
+AJITH                ADHITHYA                  45236
+AJITH                ADHITHYA                  45231
+AJITH                ADHITHYA                  45208
+AJITH                ADHITHYA                  45248
+BASHIR               HAMJI
+PAUL                 LIVA
+SR                   ADIL
+
+8 rows selected.
+
+8. SELECT LSTNAM.FSTNAM FROM INTO PERSONSS FROM PERSONSS WHERE CITY='KOZHIKODE';
+
+10. SELECT LSTNAM,FSTNAM,ADDRESS FROM PERSONSS WHERE ADDRESS IS NULL;
+
+no rows selected
+
+11. SELECT LSTNAM,FSTNAM,ADDRESS FROM PERSONSS WHERE ADDRESS IS NOT NULL;
+
+
+LSTNAM               FSTNAM               ADDRESS
+-------------------- -------------------- --------------------
+PAUL                 LIVA                 KKM
+SR                   ADIL                 VADAKARA
+AJITH                ADHITHYA             TPR
+BASHIR               HAMJI                KLM
+

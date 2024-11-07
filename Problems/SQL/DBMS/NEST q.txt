@@ -1,0 +1,136 @@
+1.CREATE TABLE DEPARTMEND(DEPARTMEND_ID NUMBER(10) PRIMARY KEY,DEPARTMEND_NAME VARCHAR(50));
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPARTMEND_ID                             NOT NULL NUMBER(10)
+ DEPARTMEND_NAME                                    VARCHAR2(50)
+2.CREATE TABLE STUDENTS(STUDENTS_ID NUMBER(10) PRIMARY KEY,STUDENTS_NAME VARCHAR(50),STUDENTS_ADDRESS VARCHAR(100),DEPARTMEND_ID NUMBER(10),FOREIGN KEY(DEPARTMEND_ID)REFERENCES DEPARTMEND(DEPARTMEND_ID));
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTS_ID                               NOT NULL NUMBER(10)
+ STUDENTS_NAME                                      VARCHAR2(50)
+ STUDENTS_ADDRESS                                   VARCHAR2(100)
+ DEPARTMEND_ID                                      NUMBER(10)
+3.INSERT INTO DEPARTMEND VALUES(1,'CS');
+INSERT INTO DEPARTMEND VALUES(2,'CY');
+INSERT INTO DEPARTMEND VALUES(3,'EC');
+INSERT INTO DEPARTMEND VALUES(4,'EE');
+INSERT INTO DEPARTMEND VALUES(5,'PY');
+SELECT * FROM DEPARTMEND;
+
+DEPARTMEND_ID DEPARTMEND_NAME
+------------- --------------------------------------------------
+            1 CS
+            2 CY
+            3 EC
+            4 EE
+            5 PY
+4.INSERT INTO STUDENTS VALUES(11,'LIVA','ABC',2);
+INSERT INTO STUDENTS VALUES(12,'IRIN','BCD',3);
+INSERT INTO STUDENTS VALUES(13,'DEVIKA','NHR',4);
+INSERT INTO STUDENTS VALUES(14,'HARSHA','GFT',2);
+INSERT INTO STUDENTS VALUES(15,'GOURI','FYHJ',1);
+SELECT * FROM STUDENTS;
+
+STUDENTS_ID STUDENTS_NAME
+----------- --------------------------------------------
+STUDENTS_ADDRESS
+--------------------------------------------------------
+DEPARTMEND_ID
+-------------
+         11 LIVA
+ABC
+            2
+
+         12 IRIN
+BCD
+            3
+
+STUDENTS_ID STUDENTS_NAME
+----------- --------------------------------------------
+STUDENTS_ADDRESS
+--------------------------------------------------------
+DEPARTMEND_ID
+-------------
+
+         13 DEVIKA
+NHR
+            4
+
+         14 HARSHA
+GFT
+
+STUDENTS_ID STUDENTS_NAME
+----------- --------------------------------------------
+STUDENTS_ADDRESS
+--------------------------------------------------------
+DEPARTMEND_ID
+-------------
+            2
+
+         15 GOURI
+FYHJ
+            1
+
+
+5.SELECT STUDENTS_NAME,STUDENTS_ADDRESS
+FROM STUDENTS
+WHERE DEPARTMEND_ID IN(SELECT DEPARTMEND_ID
+ 		       FROM DEPARTMEND
+                       WHERE DEPARTMEND_NAME='CS');
+
+STUDENTS_NAME
+--------------------------------------------------
+STUDENTS_ADDRESS
+--------------------------------------------------------------------------------
+GOURI
+FYHJ
+
+6.SELECT STUDENTS.STUDENTS_NAME,DEPARTMEND.DEPARTMEND_NAME
+FROM STUDENTS,DEPARTMEND
+WHERE STUDENTS.DEPARTMEND_ID=DEPARTMEND.DEPARTMEND_ID;
+
+STUDENTS_NAME
+--------------------------------------------------
+DEPARTMEND_NAME
+--------------------------------------------------
+GOURI
+CS
+
+HARSHA
+CY
+
+LIVA
+CY
+
+
+STUDENTS_NAME
+--------------------------------------------------
+DEPARTMEND_NAME
+--------------------------------------------------
+IRIN
+EC
+
+DEVIKA
+EE
+
+7.SELECT COUNT(*)STUDENTS_NAME,DEPARTMEND_NAME
+FROM STUDENTS,DEPARTMEND
+WHERE DEPARTMEND.DEPARTMEND_ID=STUDENTS.DEPARTMEND_ID GROUP BY DEPARTMEND_NAME;
+
+STUDENTS_NAME DEPARTMEND_NAME
+------------- --------------------------------------------------
+            1 EE
+            1 CS
+            2 CY
+            1 EC
+8.SELECT COUNT(*)STUDENTS_NAME,DEPARTMEND_NAME
+FROM STUDENTS,DEPARTMEND
+WHERE DEPARTMEND.DEPARTMEND_ID=STUDENTS.DEPARTMEND_ID GROUP BY DEPARTMEND_NAME HAVING COUNT(STUDENTS_ID)<2;
+
+STUDENTS_NAME DEPARTMEND_NAME
+------------- --------------------------------------------------
+            1 EE
+            1 CS
+            1 EC
+ 
+

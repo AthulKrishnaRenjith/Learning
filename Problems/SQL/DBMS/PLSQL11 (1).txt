@@ -1,0 +1,43 @@
+CREATE TABLE emp_tbl(emp_is INTEGER PRIMARY KEY,emp_name VARCHAR(50),emp_sal NUMBER,emp_exp INTEGER);
+INSERT INTO emp_tbl VALUES(100,'Pranav',10000,2);
+INSERT INTO emp_tbl VALUES(101,'Rahul',37000,3);
+
+SELECT * FROM emp_tbl;
+
+    EMP_IS EMP_NAME                                              EMP_SAL
+---------- -------------------------------------------------- ----------
+   EMP_EXP
+----------
+       100 Pranav                                                  10000
+         2
+
+       101 Rahul                                                   37000
+         3
+
+DECLARE
+sal emp_tbl.emp_sal%TYPE;
+expe emp_tbl.emp_exp%TYPE;
+BEGIN
+SELECT emp_exp INTO expe FROM emp_tbl WHERE emp_is=101;
+CASE expe
+    WHEN 1 THEN
+        UPDATE emp_tbl SET emp_sal = emp_sal+1000 WHERE emp_is=101;
+    WHEN 2 THEN
+        UPDATE emp_tbl SET emp_sal = emp_sal+2000 WHERE emp_is=101;
+    WHEN 3 THEN
+        UPDATE emp_tbl SET emp_sal = emp_sal+3000 WHERE emp_is=101;
+end case;
+end;
+/
+
+SELECT * FROM emp_tbl;
+
+    EMP_IS EMP_NAME                                              EMP_SAL
+---------- -------------------------------------------------- ----------
+   EMP_EXP
+----------
+       100 Pranav                                                  10000
+         2
+
+       101 Rahul                                                   40000
+         38
